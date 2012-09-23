@@ -9,6 +9,7 @@ $lang = array(
 
     'shortcode_title' => 'Shortcode',
     'macro_list' => 'Macros',
+    'shortcode_list' => 'Add-on Shortcodes',
 
     'field_macro' => 'Macro',
 
@@ -19,6 +20,7 @@ $lang = array(
     'my_macros' => 'My Macros',
     'global_macros' => 'Global Macros',
     'site_macros' => 'Site Macros',
+    'plugin_shortcodes' => 'Add-on Shortcodes',
     'field_type' => 'Type',
     'field_name' => 'Name',
     'field_name_desc' => 'The name is automatically prefixed with the scope this macro is created under.<br/><br/>For instance, if you create a macro named "location" under the "mine" scope, the final macro name will be "[mine:location]".',
@@ -34,6 +36,8 @@ $lang = array(
     'heading_value' => 'Value',
     'heading_type' => 'Type',
     'heading_scope' => 'Scope',
+    'heading_shortcode' => 'Shortcode',
+    'heading_docs' => 'Docs',
 
     // Generic messages
     'edit_item' => 'Edit',
