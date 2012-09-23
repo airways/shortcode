@@ -195,7 +195,14 @@ class Shortcode_lib extends PL_base_lib {
                             'label' => '[form] - ProForm Form',
                             'params' => array(
                                 array('type' => 'dropdown', 'name' => 'form_name', 'label' => 'Form', 'options' => $form_options),
-                            )
+                            ),
+                            'docs' => <<<END
+<p>Allows you to insert a ProForm form anywhere in your content. Simply include the name of the form you wish to render:</p>
+<code>
+[form form_name="contact_us"]
+</code>
+END
+
                         );
                 }
             }
@@ -208,7 +215,13 @@ class Shortcode_lib extends PL_base_lib {
                             'label' => '[math] - Will Hunting',
                             'params' => array(
                                 array('type' => 'input', 'name' => 'math_exp', 'label' => 'Math Expression'),
-                            )
+                            ),
+                            'docs' => <<<END
+<p>Triggers math evaluation for the given expression:</p>
+<code>
+[math math_exp="1+4*123"]
+</code>
+END
                         );
             }
 

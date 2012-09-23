@@ -47,6 +47,7 @@ class Shortcode_mcp extends Prolib_base_mcp {
         $this->_base_url = BASE.AMP.'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=shortcode';
 
         $this->EE->cp->add_to_head('<link rel="stylesheet" href="' . $this->EE->config->item('theme_folder_url') . 'third_party/shortcode/styles/main.css" type="text/css" media="screen" />');
+        $this->EE->cp->add_to_head('<link rel="stylesheet" href="' . $this->EE->config->item('theme_folder_url') . 'third_party/prolib/css/prolib.css" type="text/css" media="screen" />');
         $this->EE->cp->add_to_head('<script type="text/javascript" src="' . $this->EE->config->item('theme_folder_url') . 'third_party/shortcode/javascript/global.js"></script>');
 
         $nav = array(
@@ -59,6 +60,9 @@ class Shortcode_mcp extends Prolib_base_mcp {
         {
             $nav['site_macros'] = $this->_base_url.AMP.'filter_scope=site';
         }
+
+        $nav['plugin_shortcodes'] = $this->_base_url.AMP.'method=plugin_shortcodes';
+        
         $this->EE->cp->set_right_nav($nav);
     }
 
@@ -74,21 +78,7 @@ class Shortcode_mcp extends Prolib_base_mcp {
         $params['set_title'] = false;
         $title = lang('shortcode_module_name');
 
-        if($this->EE->input->get('filter_scope'))
-        {
-            switch($this->EE->input->get('filter_scope'))
-            {
-                case 'mine':
-                    $title = lang('my_macros');
-                    break;
-                case 'site':
-                    $title = lang('site_macros');
-                    break;
-                case 'global':
-                    $title = lang('global_macros');
-                    break;
-            }
-        }
+        $title = $this->get_scope_title();
 
         $this->EE->cp->set_variable('cp_page_title', $title);
 
@@ -110,6 +100,12 @@ class Shortcode_mcp extends Prolib_base_mcp {
 
         return parent::listing($params);
     }
+    
+    public function create()
+    {
+        $this->type_vars[$this->type]['create'] = array('info' => '<b>Note:</b> Creating new macro in scope '.$this->get_scope_title().'.');
+        return parent::create();
+    }
 
     public function process_create()
     {
@@ -120,6 +116,39 @@ class Shortcode_mcp extends Prolib_base_mcp {
             $_POST['scope'] = 'mine';
         }
         return parent::process_create();
+    }
+    
+    public function plugin_shortcodes()
+    {
+        $this->sub_page('shortcode_list');
+        $vars = array();
+        
+        $vars['items'] = $this->lib->get_shortcodes();
+//        var_dump($vars['plugins']);
+        return $this->EE->load->view('shortcodes/listing', $vars, TRUE);
+    }
+    
+    
+    private function get_scope_title()
+    {
+        $title = lang('my_macros');
+        if($this->EE->input->get('filter_scope') || $this->EE->input->get('scope'))
+        {
+            switch($this->EE->input->get('filter_scope').$this->EE->input->get('scope'))
+            {
+                case 'mine':
+                    $title = lang('my_macros');
+                    break;
+                case 'site':
+                    $title = lang('site_macros');
+                    break;
+                case 'global':
+                    $title = lang('global_macros');
+                    break;
+            }
+        }
+        
+        return $title;
     }
 }
 

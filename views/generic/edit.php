@@ -17,6 +17,12 @@ if(count($_POST) > 0)
     if(isset($message) && $message != FALSE) echo '<div class="message error-message">'.$message.'</div>';
     if(isset($error) && $error != FALSE) echo '<div class="message error-message">'.$error.'</div>';
 }
+
+
+if(isset($info) && $info != FALSE) echo '<div class="info">'.$info.'</div>';
+if(isset($warning) && $warning != FALSE) echo '<div class="warning">'.$warning.'</div>';
+
+
 ?>
 <!-- <div class="message error-message">
     Please complete the highlighted fields below.
