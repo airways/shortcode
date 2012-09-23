@@ -32,7 +32,7 @@
 
 require_once PATH_THIRD.'shortcode/lib.shortcode.php';
 
-class Shortcode_mcp extends Prolib_mcp {
+class Shortcode_mcp extends Prolib_base_mcp {
 
     public $return_data;
 

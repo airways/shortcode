@@ -174,6 +174,44 @@ class Shortcode_lib extends PL_base_lib {
                 }
             }
 
+            /* Add some built in shortcodes, if the corresponding plugins/modules exist */
+            if(file_exists(PATH_THIRD.'proform')) {
+                $this->EE->lang->loadfile('proform');
+                $form_options = array();
+
+                // If ProForm is actually installed, get a list of it's forms and add a shortcode
+                if($this->EE->db->table_exists('exp_proform_forms')) {
+                    $forms = $this->EE->db->get('exp_proform_forms');
+                    foreach($forms->result() as $form)
+                    {
+                        $form_options[$form->form_name] = $form->form_label;
+                    }
+                    ksort($form_options);
+
+                    $shortcodes['form'] = array(
+                            '_name' => 'form',
+                            'class' => 'proform',
+                            'method' => 'simple',
+                            'label' => '[form] - ProForm Form',
+                            'params' => array(
+                                array('type' => 'dropdown', 'name' => 'form_name', 'label' => 'Form', 'options' => $form_options),
+                            )
+                        );
+                }
+            }
+
+            if(file_exists(PATH_THIRD.'will_hunting')) {
+                $shortcodes['math'] = array(
+                            '_name' => 'math',
+                            'class' => 'will_hunting',
+                            'method' => 'solve',
+                            'label' => '[math] - Will Hunting',
+                            'params' => array(
+                                array('type' => 'input', 'name' => 'math_exp', 'label' => 'Math Expression'),
+                            )
+                        );
+            }
+
             /* Cache our list so we don't have to do that again since this will be called
                at least twice on most pages. */
             $this->shortcodes = $shortcodes;
