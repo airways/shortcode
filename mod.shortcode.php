@@ -38,7 +38,37 @@ class Shortcode {
 
     public function __construct()
     {
-        $this->EE =& get_instance();
+        prolib($this, 'shortcode');
+        $this->lib = &Shortcode_lib::get_instance();
+    }
+    
+    public function tweet()
+    {
+        $p_id = $this->EE->TMPL->fetch_param('id');
+        $p_url = $this->EE->TMPL->fetch_param('url');
+        
+        $params = false;
+        if($p_id) $params = 'id='.$p_id;
+        if($p_url) $params = 'url='.$p_url;
+        
+        if($params)
+        {
+            if($html = $this->lib->vault->get(md5('twitter'.$params)))
+            {
+                return '[cached]'. $html;
+            } else {
+                $response = file_get_contents('https://api.twitter.com/1/statuses/oembed.xml?'.$params);
+                if($response && $xml = new SimpleXMLElement($response))
+                {
+                    $this->lib->vault->put((string)$xml->html, true, md5('twitter'.$params));
+                    return '[uncached]'. $xml->html;
+                } else {
+                    return '[tweet - invalid response from Twitter API]';
+                }
+            }
+        } else {
+            return '[tweet - no ID or URL paremter provided]';
+        }
     }
 
 }

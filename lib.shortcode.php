@@ -175,6 +175,34 @@ class Shortcode_lib extends PL_base_lib {
             }
 
             /* Add some built in shortcodes, if the corresponding plugins/modules exist */
+            
+            $shortcodes['tweet'] = array(
+                    '_name' => 'tweet',
+                    'class' => 'shortcode',
+                    'method' => 'tweet',
+                    'label' => '[tweet] - Embed an individual Tweet',
+                    'params' => array(
+                        array('type' => 'input', 'name' => 'id', 'label' => 'ID of Tweet'),
+                        array('type' => 'input', 'name' => 'url', 'label' => 'URL of Tweet'),
+                    ),
+                    'docs' => <<<END
+<p>Allows you to embed a single tweet from Twitter:</p>
+<pre>
+[tweet id="133640144317198338"]
+</pre>
+or
+<pre>
+[tweet url="https://twitter.com/twitterapi/status/133640144317198338"]
+</pre>
+
+<p>Because this request is rate limited, the results of the API call will be cached in the <code>exp_shortcode_vault</code> table.</p>
+
+<p>This shortcode is built into the module and is always available.</p>
+END
+
+                );
+
+            
             if(file_exists(PATH_THIRD.'proform')) {
                 $this->EE->lang->loadfile('proform');
                 $form_options = array();
