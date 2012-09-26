@@ -20,6 +20,13 @@ if(!isset($embedded) || !$embedded):
 
 ?>
 <div id="process_tab">
+
+<?php if(!isset($license_key) || !$license_key || strlen($license_key) < 16): ?>
+<div class="warning">
+    <p><strong>Reminder:</strong> You have not yet entered your Shortcode License Key. Please do so on the <a href="<?php echo TAB_ACTION.'method=preferences'; ?>">Module Settings</a> page for Shortcode. <em>Please keep in mind that this module is licensed for use on one production site per license key.</em> Your purchase helps continue further development of Shortcode, <b>thank you</b>!</em></p>
+</div>
+<?php endif; ?>
+
     <ul class="process_fields">
 <?php endif; ?>
         <li class="section first">

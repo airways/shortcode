@@ -5,6 +5,7 @@ require_once PATH_THIRD.'shortcode/lib.shortcode.php';
 class Shortcode_preferences extends PL_prefs
 {
     var $default_prefs = array(
+        'shortcode_license_key' => ''
     );
 
     public function __construct(&$lib)

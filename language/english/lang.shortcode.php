@@ -26,6 +26,9 @@ $lang = array(
     'field_name_desc' => 'The name is automatically prefixed with the scope this macro is created under.<br/><br/>For instance, if you create a macro named "location" under the "mine" scope, the final macro name will be "[mine:location]".',
     'field_value' => 'Value',
     'field_scope' => 'Scope',
+    'field_pref_shortcode_license_key' => 'Shortcode License',
+    'field_pref_shortcode_license_key_desc' => 'Enter your Devot:ee or other license key here. Shortcode is licensed for use on one production site per license key. Your purchase supports future development of this module. Thank you!',
+
     
     'preferences' => 'Module Settings',
     'tab_preferences' => 'Module Settings',

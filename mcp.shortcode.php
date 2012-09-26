@@ -53,7 +53,6 @@ class Shortcode_mcp extends Prolib_base_mcp {
         $nav = array(
             'my_macros'         => $this->_base_url.AMP.'filter_scope=mine',
 //             'global_macros'     => $this->_base_url.AMP.'filter_scope=global',
-//             'tab_preferences'   => $this->_base_url.AMP.'method=preferences',
         );
 
         if($this->EE->session->userdata('group_id') == 1)
@@ -62,6 +61,11 @@ class Shortcode_mcp extends Prolib_base_mcp {
         }
 
         $nav['plugin_shortcodes'] = $this->_base_url.AMP.'method=plugin_shortcodes';
+        $nav['tab_preferences'] = $this->_base_url.AMP.'method=preferences';
+        
+        $this->add_vars = array(
+            'license_key' => $this->lib->prefs->ini('shortcode_license_key')
+        );
         
         $this->EE->cp->set_right_nav($nav);
     }
@@ -103,7 +107,8 @@ class Shortcode_mcp extends Prolib_base_mcp {
     
     public function create()
     {
-        $this->type_vars[$this->type]['create'] = array('info' => '<b>Note:</b> Creating new macro in scope '.$this->get_scope_title().'.');
+        $this->type_vars[$this->type]['create'] = array('info' => '<b>Note:</b> Creating new macro in scope '.$this->get_scope_title().'.',
+            'license_key' => $this->lib->prefs->ini('shortcode_license_key'));
         return parent::create();
     }
 
@@ -124,6 +129,8 @@ class Shortcode_mcp extends Prolib_base_mcp {
         $vars = array();
         
         $vars['items'] = $this->lib->get_shortcodes();
+        $vars['license_key'] = $this->lib->prefs->ini('shortcode_license_key');
+        
 //        var_dump($vars['plugins']);
         return $this->EE->load->view('shortcodes/listing', $vars, TRUE);
     }

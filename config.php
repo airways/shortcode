@@ -1,7 +1,7 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 // @version 1.03
-// @prolib 0.54
+// @prolib 0.55
 
 define('SHORTCODE_VERSION',       '1.03');
 define('SHORTCODE_NAME',          'Shortcode');
