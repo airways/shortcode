@@ -1,9 +1,9 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-// @version 1.05
-// @prolib 0.55
+// @version 1.06
+// @prolib 0.56
 
-define('SHORTCODE_VERSION',       '1.05');
+define('SHORTCODE_VERSION',       '1.06');
 define('SHORTCODE_NAME',          'Shortcode');
 define('SHORTCODE_CLASS',         'Shortcode'); // must match module class name
 define('SHORTCODE_DESCRIPTION',   'Provides shortcode macros which can be set by members on a global, site, and member-specific basis as well provided by plugins and modules.');
