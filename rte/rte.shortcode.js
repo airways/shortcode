@@ -128,7 +128,7 @@ WysiHat.addButton('shortcode', {
 //         });
         dialog +=
             '<p class="buttons">' +
-            '   <input class="submit" type="submit" value="Insert Macro" /></p>' +
+            '   <input class="submit" type="submit" value="Insert" /></p>' +
             '</div>';
 
         var $dialog = $(dialog), that = this;
@@ -141,7 +141,7 @@ WysiHat.addButton('shortcode', {
                 position: ["center","center"],
                 modal: true,
                 draggable: true,
-                title: 'Insert Macro',
+                title: 'Insert Macro or Shortcode',
                 autoOpen: false,
                 zIndex: 99999,
                 open: function() {

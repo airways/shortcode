@@ -11,7 +11,7 @@ $lang = array(
     'macro_list' => 'Macros',
     'shortcode_list' => 'Add-on Shortcodes',
 
-    'field_macro' => 'Macro',
+    'field_macro' => 'Macro or Shortcode',
 
     'macro_create' => 'Create Macro',
     'macro_edit' => 'Edit Macro',

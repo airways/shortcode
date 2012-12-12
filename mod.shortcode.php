@@ -42,6 +42,12 @@ class Shortcode {
         $this->lib = &Shortcode_lib::get_instance();
     }
     
+    public function parse()
+    {
+        $p_author_id = $this->EE->TMPL->fetch_param('author_id');
+        return $this->lib->parse($this->EE->TMPL->tagdata, $p_author_id);
+    }
+    
     public function tweet()
     {
         $p_id = $this->EE->TMPL->fetch_param('id');
@@ -55,13 +61,13 @@ class Shortcode {
         {
             if($html = $this->lib->vault->get(md5('twitter'.$params)))
             {
-                return '[cached]'. $html;
+                return $html;
             } else {
                 $response = file_get_contents('https://api.twitter.com/1/statuses/oembed.xml?'.$params);
                 if($response && $xml = new SimpleXMLElement($response))
                 {
                     $this->lib->vault->put((string)$xml->html, true, md5('twitter'.$params));
-                    return '[uncached]'. $xml->html;
+                    return $xml->html;
                 } else {
                     return '[tweet - invalid response from Twitter API]';
                 }

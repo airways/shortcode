@@ -47,6 +47,7 @@ class Shortcode_rte {
     {
         prolib($this, 'shortcode');
         $this->lib = Shortcode_lib::get_instance();
+        $this->_base_url = BASE.AMP.'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=shortcode';
     }
 
     function globals()
@@ -165,7 +166,16 @@ END;
         }
         ksort($shortcode_options);
 
-        $options = array('Macros' => array_unique($macro_options), 'Shortcodes' => array_unique($shortcode_options));
+        $options = array();
+        if(count($macro_options) > 0)
+        {
+            $options['Macros'] = array_unique($macro_options);
+        }
+        
+        if(count($shortcode_options) > 0)
+        {
+            $options['Shortcodes'] = array_unique($shortcode_options);
+        }
 
         $form_elements = $this->prolib->pl_forms->create_cp_form(
                 array('macro' => ''),
@@ -173,11 +183,21 @@ END;
                 array(), array());
 
         $form = '';
+        
         foreach($form_elements as $element)
         {
             $form .= '<label for="'.$element['lang_field'].'">'.lang('field_'.$element['lang_field']).'</label> '.$element['control'];
         }
 
+        if(count($macro_options) == 0)
+        {
+            $form .= '<br/><div class="info"><b>Note: No Macros setup yet</b><br/>You can create some on the <b><a href="'.$this->_base_url.'">Shortcode module page</a></b>.</div>';
+        }
+        if(count($shortcode_options) == 0)
+        {
+            $form .= '<div class="info"><b>Note: No Shortcodes installed yet</b><br/>You can download some from <a href="http://metasushi.com">metasushi.com</a>.</div>';
+        }
+        
         $js = "\n\n";
         $js .= 'var SHORTCODE_OPTS = '.json_encode($opts_forms).";\n\n";
 //         $js .= 'var SHORTCODE_SELECT = "'.str_replace("\n", "\\\n", addslashes(form_dropdown('macro', $options, $opts_forms))).'"';
