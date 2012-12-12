@@ -174,7 +174,7 @@ class Shortcode_lib extends PL_base_lib {
                 }
             }
 
-            /* Add some built in shortcodes, if the corresponding plugins/modules exist */
+            /* Add some built in shortcodes */
             
             $shortcodes['tweet'] = array(
                     '_name' => 'tweet',
@@ -199,9 +199,9 @@ or
 
 <p>This shortcode is built into the module and is always available.</p>
 END
-
                 );
 
+            /* Add some third-party shortcodes, if the corresponding plugins/modules exist */
             
             if(file_exists(PATH_THIRD.'proform')) {
                 $this->EE->lang->loadfile('proform');

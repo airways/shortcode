@@ -65,7 +65,6 @@ class Shortcode_ext {
 
         $hooks = array(
             'channel_entries_tagdata_end'       => 'channel_entries_tagdata_end',
-            'sessions_end'                      => 'sessions_end',
         );
 
         foreach ($hooks as $hook => $method)
@@ -88,14 +87,21 @@ class Shortcode_ext {
         return $this->lib->parse($tagdata, $row['author_id']);
     }
 
-    public function sessions_end()
-    {
-        if((!defined('REQ') || REQ != 'CP') && !$this->EE->input->get('cp'))
-        {
-            ob_start();
-            register_shutdown_function('shortcode_shutdown');
-        }
-    }
+    /*
+    
+    Without some sort of escaping for content entered by visitors (such as in comments or URL segments), this is
+    too dangerous to leave in.
+    
+    // public function sessions_end()
+    // {
+    //     if((!defined('REQ') || REQ != 'CP') && !$this->EE->input->get('cp'))
+    //     {
+    //         ob_start();
+    //         register_shutdown_function('shortcode_shutdown');
+    //     }
+    // }
+    
+    */
 
     function disable_extension()
     {
@@ -114,20 +120,27 @@ class Shortcode_ext {
 }
 
 
-function shortcode_shutdown()
-{
-    $EE = &get_instance();
-    if(count($EE->db->ar_from) > 0 || count($EE->db->ar_where) > 0) {
-        ob_end_flush();
-        exit;
-    }
+/*
+    
+Without some sort of escaping for content entered by visitors (such as in comments or URL segments), this is
+too dangerous to leave in.
 
-    $lib = &Shortcode_lib::get_instance();
-    $content = ob_get_contents();
-    ob_end_clean();
-    $content = $lib->parse($content);
-    echo $content;
-}
+// function shortcode_shutdown()
+// {
+//     $EE = &get_instance();
+//     if(count($EE->db->ar_from) > 0 || count($EE->db->ar_where) > 0) {
+//         ob_end_flush();
+//         exit;
+//     }
+// 
+//     $lib = &Shortcode_lib::get_instance();
+//     $content = ob_get_contents();
+//     ob_end_clean();
+//     $content = $lib->parse($content);
+//     echo $content;
+// }
+
+*/
 
 }
 
