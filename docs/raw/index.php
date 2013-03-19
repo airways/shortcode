@@ -5,7 +5,7 @@
     <h1>Shortcode Module</h1>
     <!-- <kbd>PUBLISH</kbd> -->
     
-    <p><dfn>Shortcode</dfn> is a module designed to give you the ability to inject dynamic content inside of
+    <p><dfn><a href="http://devot-ee.com/add-ons/shortcode">Shortcode</a></dfn> is a module designed to give you the ability to inject dynamic content inside of
     any custom field you have defined.</p>
     
     <p>At it's most basic usage, Shortcode allows the creation and re-use of <b>macros</b> of content that can be defined by an individual author or globally for the entire site.</p>
