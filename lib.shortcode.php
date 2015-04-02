@@ -289,13 +289,20 @@ END
         if($author_id)
         {
             $shortcodes = $this->get_shortcodes();
+            $count = 0;
 
             // Replace full shortcodes with template tag calls to the designated package / method
             foreach($shortcodes as $shortcode => $info)
             {
+                $content = str_replace('&#8220;', '"', $content);
+                $content = str_replace('&#8221;', '"', $content);
                 $content = preg_replace('#\['.$shortcode.'(.*?)\]#',
                                         '{exp:'.$info['class'].':'.$info['method'].' \1}',
-                                        $content);
+                                        $content, -1, $shortcode_count);
+                $count += $shortcode_count;
+            }
+            if($count) {
+                #echo $content;exit;
             }
         }
 
