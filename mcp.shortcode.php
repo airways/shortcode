@@ -84,7 +84,7 @@ class Shortcode_mcp extends Prolib_base_mcp {
 
         $title = $this->get_scope_title();
 
-        $this->EE->cp->set_variable('cp_page_title', $title);
+        $this->set_page_title($title);
 
         switch($this->EE->input->get('filter_scope'))
         {

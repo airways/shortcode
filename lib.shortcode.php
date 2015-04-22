@@ -144,6 +144,13 @@ class Shortcode_lib extends PL_base_lib {
                     $class = $key.'_plg';
                 }
 
+                // Or a new style plugin
+                elseif(file_exists($path.'/pi.'.$key.'.php'))
+                {
+                    require_once($path.'/pi.'.$key.'.php');
+                    $class = $key;
+                }
+
                 /* Did we find a module, or plugin, does it exist, and does it have the
                    init_shortcodes() method? */
                 if($class && class_exists($class) && method_exists($class, 'init_shortcodes'))
@@ -269,11 +276,13 @@ END
     {
         // Get all site macros
         $macros = $this->get_site_macros();
+        $this->EE->TMPL->log_item('Shortcode: Add-on enrty global macros = '.print_r($macros, true));
 
         // Get all macros from the entry author
         if($author_id)
         {
             $mine = $this->get_author_macros($author_id);
+            $this->EE->TMPL->log_item('Shortcode: Add-on enrty author macros = '.print_r($mine, true));
             $macros = array_merge($macros, $mine);
         }
 
@@ -289,6 +298,8 @@ END
         if($author_id)
         {
             $shortcodes = $this->get_shortcodes();
+            
+            $this->EE->TMPL->log_item('Shortcode: Add-on shortcodes available = '.print_r($shortcodes, true));
 
             // Replace full shortcodes with template tag calls to the designated package / method
             foreach($shortcodes as $shortcode => $info)
