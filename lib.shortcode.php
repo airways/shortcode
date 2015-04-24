@@ -133,15 +133,18 @@ class Shortcode_lib extends PL_base_lib {
                 // See if this is a module...
                 if(file_exists($path.'/mod.'.$key.'.php'))
                 {
+                    // If the module is not installed, skip it
+                    if($this->EE->db->where('module_name', ucfirst($key))->get('exp_modules')->num_rows() == 0) continue;
+
                     require_once($path.'/mod.'.$key.'.php');
                     $class = $key;
                 }
 
                 // Or a plugin
-                elseif(file_exists($path.'/plg.'.$key.'.php'))
+                elseif(file_exists($path.'/pi.'.$key.'.php'))
                 {
-                    require_once($path.'/plg.'.$key.'.php');
-                    $class = $key.'_plg';
+                    require_once($path.'/pi.'.$key.'.php');
+                    $class = ucfirst($key);
                 }
 
                 /* Did we find a module, or plugin, does it exist, and does it have the
@@ -297,8 +300,10 @@ END
                 $content = str_replace('&#8220;', '"', $content);
                 $content = str_replace('&#8221;', '"', $content);
                 $content = preg_replace('#\['.$shortcode.'(.*?)\]#',
-                                        '{exp:'.$info['class'].':'.$info['method'].' \1}',
+                                        '{exp:'.strtolower($info['class'].':'.$info['method']).'\1}',
                                         $content, -1, $shortcode_count);
+                $content = str_replace('[/'.$shortcode.']',
+                                        '{/exp:'.strtolower($info['class'].':'.$info['method']).'}', $content);
                 $count += $shortcode_count;
             }
             if($count) {
