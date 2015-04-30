@@ -300,7 +300,7 @@ END
                 $content = str_replace('&#8220;', '"', $content);
                 $content = str_replace('&#8221;', '"', $content);
                 $content = preg_replace('#\['.$shortcode.'(.*?)\]#',
-                                        '{exp:'.strtolower($info['class'].':'.$info['method']).'\1}',
+                                        '{exp:'.strtolower($info['class'].':'.$info['method']).'\1 random}',
                                         $content, -1, $shortcode_count);
                 $content = str_replace('[/'.$shortcode.']',
                                         '{/exp:'.strtolower($info['class'].':'.$info['method']).'}', $content);
