@@ -27,6 +27,8 @@ Existing plugins and modules can be converted to shortcodes with very little cod
    
 Assistance writing glue code for existing plugins or modules is also available - just post a request for support for the plugin in the forum.
 
+## Documentation
+Additional documentation and examples are available at http://metasushi.com/documentation/shortcode/.
 
 ## License
 
