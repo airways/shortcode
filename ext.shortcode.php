@@ -84,7 +84,26 @@ class Shortcode_ext {
 
     public function channel_entries_tagdata_end($tagdata, $row, $mod)
     {
-        return $this->lib->parse($tagdata, $row['author_id']);
+        $tagdata = $this->lib->parse($tagdata, $row['author_id']);
+        if(strpos($tagdata, '{exp:') !== FALSE)
+        {
+            //echo htmlentities($tagdata);
+
+            /*
+            if(!class_exists('EE_Template'))
+            {
+                ee()->load->helper('text');
+                ee()->load->library('Template');
+            }
+            ee()->TMPL = new EE_Template();
+            ee()->TMPL->template = $tagdata;
+            ee()->TMPL->template = ee()->TMPL->parse_globals(ee()->TMPL->template);
+            ee()->TMPL->parse(ee()->TMPL->template);
+            ee()->TMPL->final_template = ee()->TMPL->parse_globals(ee()->TMPL->final_template);
+            $result = ee()->TMPL->final_template;
+            */
+        }
+        return $tagdata;
     }
 
     /*

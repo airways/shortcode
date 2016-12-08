@@ -133,15 +133,18 @@ class Shortcode_lib extends PL_base_lib {
                 // See if this is a module...
                 if(file_exists($path.'/mod.'.$key.'.php'))
                 {
+                    // If the module is not installed, skip it
+                    if($this->EE->db->where('module_name', ucfirst($key))->get('exp_modules')->num_rows() == 0) continue;
+
                     require_once($path.'/mod.'.$key.'.php');
                     $class = $key;
                 }
 
                 // Or a plugin
-                elseif(file_exists($path.'/plg.'.$key.'.php'))
+                elseif(file_exists($path.'/pi.'.$key.'.php'))
                 {
-                    require_once($path.'/plg.'.$key.'.php');
-                    $class = $key.'_plg';
+                    require_once($path.'/pi.'.$key.'.php');
+                    $class = ucfirst($key);
                 }
 
                 // Or a new style plugin
@@ -300,13 +303,22 @@ END
             $shortcodes = $this->get_shortcodes();
             
             $this->EE->TMPL->log_item('Shortcode: Add-on shortcodes available = '.print_r($shortcodes, true));
+            $count = 0;
 
             // Replace full shortcodes with template tag calls to the designated package / method
             foreach($shortcodes as $shortcode => $info)
             {
+                $content = str_replace('&#8220;', '"', $content);
+                $content = str_replace('&#8221;', '"', $content);
                 $content = preg_replace('#\['.$shortcode.'(.*?)\]#',
-                                        '{exp:'.$info['class'].':'.$info['method'].' \1}',
-                                        $content);
+                                        '{exp:'.strtolower($info['class'].':'.$info['method']).'\1 random}',
+                                        $content, -1, $shortcode_count);
+                $content = str_replace('[/'.$shortcode.']',
+                                        '{/exp:'.strtolower($info['class'].':'.$info['method']).'}', $content);
+                $count += $shortcode_count;
+            }
+            if($count) {
+                #echo $content;exit;
             }
         }
 
