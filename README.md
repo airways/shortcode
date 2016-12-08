@@ -1,6 +1,10 @@
+## Shortcode
 Shortcode aims to allow for more dynamic use of content by authors and editors, allowing for injection of reusable bits of content or even whole pieces of functionality into any field in EE.
 
 Shortcode provides two types of codes for use in any content in EE: user-defined Macros specific to each author and each site, as well as a simple API for third-party plugins and modules to expose their tags through the shortcode Rich Text Editor dialog (or manual entry in any type of field) - complete with automatically rendered options forms.
+
+## Required Library
+This add-on REQUIRES ProLib to be in your third_party directory. Get it here: https://github.com/airways/ProLib
 
 ## Two Types of Codes
  
