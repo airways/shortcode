@@ -26,3 +26,37 @@ A simple Shortcode API  allows for any Plugin or Module to provide custom Shortc
 Existing plugins and modules can be converted to shortcodes with very little code. Assistance in the forum is available for anyone who wants to add support to their own add-ons.
    
 Assistance writing glue code for existing plugins or modules is also available - just post a request for support for the plugin in the forum.
+
+
+## License
+
+Copyright (c)2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016.
+Isaac Raway and MetaSushi, LLC. All rights reserved.
+
+You may use this software under a commercial license, if you have one,
+or under the GPL v3 contained in LICENSE, in which case you MUST
+comply with all GPL requirements.
+
+This source is commercial software. Use of this software requires a
+site license for each domain it is used on. Use of this software or any
+of its source code without express written permission in the form of
+a purchased commercial or other license is prohibited.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+As part of the license agreement for this software, all modifications
+to this source must be submitted to the original author for review and
+possible inclusion in future releases. No compensation will be provided
+for patches, although where possible we will attribute each contribution
+in file revision notes. Submitting such modifications constitutes
+assignment of copyright to the original author (Isaac Raway and
+MetaSushi, LLC) for such modifications. If you do not wish to assign
+copyright to the original author, your license to  use and modify this
+source is null and void. Use of this software constitutes your agreement
+to this clause.
+
+You are licensed to use this code only under the GPL v3, contained in the
+file LICENSE.
