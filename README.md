@@ -57,6 +57,3 @@ MetaSushi, LLC) for such modifications. If you do not wish to assign
 copyright to the original author, your license to  use and modify this
 source is null and void. Use of this software constitutes your agreement
 to this clause.
-
-You are licensed to use this code only under the GPL v3, contained in the
-file LICENSE.
